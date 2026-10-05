@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ================= 坐标三要素 ================= -->
+    <!-- groupId + artifactId + version 唯一确定一个构件 -->
+    <groupId>com.test</groupId>
+    <artifactId>PackageSystem</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 项目类型：jar / war / pom ...（默认就是 jar，这里显式写出来） -->
+    <packaging>jar</packaging>
+
+    <name>PackageSystem</name>
+    <description>微光 2026 招新 Web 后端 05 · Task4 快递取件码查询系统</description>
+
+    <!-- ================= 属性：统一管理版本号 ================= -->
+    <properties>
+        <maven.compiler.source>27</maven.compiler.source>
+        <maven.compiler.target>27</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <fastjson.version>2.0.51</fastjson.version>
+
+        <!-- 插件版本也统一管理。不写的话 Maven 会用内置默认版本，
+             既能跑通也会给出 'plugin.version is missing' 警告 -->
+        <maven.jar.plugin.version>3.5.1</maven.jar.plugin.version>
+    </properties>
+
+    <!-- ================= 构建配置 ================= -->
+    <build>
+        <plugins>
+            <!-- 在 jar 的 MANIFEST.MF 里写上主类，这样 java -jar 直接起服务端 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.test.Server</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- ================= 依赖：要导入哪些 jar 包 ================= -->
+    <dependencies>
+
+        <!-- Task4 用 fastjson 做 JSON 字符串 ↔ Java 对象 的互相转换 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
